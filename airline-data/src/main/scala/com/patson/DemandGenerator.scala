@@ -222,7 +222,6 @@ object DemandGenerator {
          0 
         }
       val businessClassPercentage : Double =
-        if (flightType != SHORT_HAUL_DOMESTIC) {
           if (income <= BUSINESS_CLASS_INCOME_MIN) {
             0 
           } else if (income >= BUSINESS_CLASS_INCOME_MAX) {
@@ -230,9 +229,6 @@ object DemandGenerator {
           } else { 
             BUSINESS_CLASS_PERCENTAGE_MAX(passengerType) * (income - BUSINESS_CLASS_INCOME_MIN) / (BUSINESS_CLASS_INCOME_MAX - BUSINESS_CLASS_INCOME_MIN)
           }
-        } else {
-         0 
-        }
       var firstClassDemand = (adjustedDemand * firstClassPercentage).toInt
       var businessClassDemand = (adjustedDemand * businessClassPercentage).toInt
       val economyClassDemand = adjustedDemand.toInt - firstClassDemand - businessClassDemand
