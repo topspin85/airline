@@ -202,7 +202,7 @@ object DemandGenerator {
       }
 	    
       //adjustments : diminished demand for close short routes
-      if (adjustedDemand >= 50 && distance < 250) {
+      if (adjustedDemand >= 50 && distance < 200) {
         adjustedDemand = 50 + Math.pow(adjustedDemand - 100, 0.4)
       }
       
@@ -234,7 +234,7 @@ object DemandGenerator {
       val economyClassDemand = adjustedDemand.toInt - firstClassDemand - businessClassDemand
 	    
       //add extra business and first class for all high population airports to international features
-      if (fromAirport.population >= 500000) { 
+      if (fromAirport.population >= 500000 && distance > 250) { 
         toAirport.getFeatures().foreach { feature =>
 	  if( feature.featureType == INTERNATIONAL_HUB ) {
 	    firstClassDemand += (fromAirport.population / 500000 * feature.strengthFactor).toInt
